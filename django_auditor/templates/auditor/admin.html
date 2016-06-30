@@ -1,0 +1,38 @@
+<table style="border: 1px solid #BBB;padding:4px;border-collapse: collapse;font-family:helvetica, arial, sans-serif;text-align:center;">
+	<thead>
+		<tr style="background-color:#eee;">
+			<th style="border: 1px solid #BBB;padding:4px">Id</th>
+			<th style="border: 1px solid #BBB;padding:4px">Action</th>
+			<th style="border: 1px solid #BBB;padding:4px">Model</th>
+			<th style="border: 1px solid #BBB;padding:4px">Object Id</th>
+			<th style="border: 1px solid #BBB;padding:4px">Object Name</th>
+			<th style="border: 1px solid #BBB;padding:4px">Field</th>
+			<th style="border: 1px solid #BBB;padding:4px">Old Value</th>
+			<th style="border: 1px solid #BBB;padding:4px">New Value</th>
+			<th style="border: 1px solid #BBB;padding:4px">User</th>
+			<th style="border: 1px solid #BBB;padding:4px">Date</th>
+			{% if tenant %}
+			<th style="border: 1px solid #BBB;padding:4px">Tenant</th>
+			{% endif %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for audit in audits %}
+		<tr>
+			<td style="border: 1px solid #BBB;padding:4px">{{ audit.id }}</td>
+			<td style="border: 1px solid #BBB;padding:4px">{{ audit.action }}</td>
+			<td style="border: 1px solid #BBB;padding:4px">{{ audit.content_type.name }}</td>
+			<td style="border: 1px solid #BBB;padding:4px">{{ audit.object_id }}</td>
+			<td style="border: 1px solid #BBB;padding:4px">{{ audit.content_object }}</td>
+			<td style="border: 1px solid #BBB;padding:4px">{{ audit.field }}</td>
+			<td style="border: 1px solid #BBB;padding:4px">{{ audit.old_value|default_if_none:"&nbsp;" }}</td>
+			<td style="border: 1px solid #BBB;padding:4px">{{ audit.new_value|default_if_none:"&nbsp;" }}</td>
+			<td style="border: 1px solid #BBB;padding:4px">{{ audit.user }}</td>
+			<td style="border: 1px solid #BBB;padding:4px">{{ audit.stamp }}</td>
+			{% if tenant %}
+			<td style="border: 1px solid #BBB;padding:4px">{{ audit.tenant }}</td>
+			{% endif %}
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
